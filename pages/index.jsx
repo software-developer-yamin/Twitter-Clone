@@ -1,4 +1,3 @@
-
 import { getProviders, getSession, useSession } from "next-auth/react";
 import Head from "next/head";
 import { useRecoilState } from "recoil";
