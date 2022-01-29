@@ -1,37 +1,40 @@
+
 import { getProviders, getSession, useSession } from "next-auth/react";
-import Head from 'next/head';
+import Head from "next/head";
+import { useRecoilState } from "recoil";
 import { modalState } from "../atoms/modalAtom";
-import Feed from '../components/Feed';
-import Login from '../components/Login';
+import Feed from "../components/Feed";
+import Login from "../components/Login";
 import Modal from "../components/Modal";
-import Sidebar from '../components/Sidebar';
-import { useRecoilState } from 'recoil';
+import Sidebar from "../components/Sidebar";
 import Widgets from "../components/Widgets";
 
-export default function Home({ providers,trendingResults, followResults }) {
-
+export default function Home({ trendingResults, followResults, providers }) {
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useRecoilState(modalState);
 
-  if (!session) return <Login providers={providers} />
+  if (!session) return <Login providers={providers} />;
 
   return (
-    <div>
+    <div className="">
       <Head>
-        <title>Create Next App</title>
+        <title>Home / Twitter</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className='bg-black min-h-screen flex max-w-[1500px] mx-auto text-white' >
+
+      <main className="bg-black min-h-screen flex max-w-[1500px] mx-auto">
         <Sidebar />
         <Feed />
-        <Widgets trendingResults={trendingResults} followResults={followResults} />
+        <Widgets
+          trendingResults={trendingResults}
+          followResults={followResults}
+        />
+
         {isOpen && <Modal />}
       </main>
     </div>
-  )
-};
-
-
+  );
+}
 
 export async function getServerSideProps(context) {
   const trendingResults = await fetch("https://jsonkeeper.com/b/NKEV").then(

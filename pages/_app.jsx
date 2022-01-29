@@ -1,7 +1,7 @@
-import 'emoji-mart/css/emoji-mart.css';
+import "emoji-mart/css/emoji-mart.css";
 import { SessionProvider } from "next-auth/react";
-import { RecoilRoot } from 'recoil';
-import '../styles/globals.css';
+import { RecoilRoot } from "recoil";
+import "../styles/globals.css";
 
 export default function App({
   Component,
@@ -13,5 +13,5 @@ export default function App({
         <Component {...pageProps} />
       </RecoilRoot>
     </SessionProvider>
-  )
+  );
 }
